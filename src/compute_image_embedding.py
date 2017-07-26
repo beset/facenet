@@ -15,7 +15,7 @@ def compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_place
                 	embedding_size,emb_array,image_path):
 
     image = facenet.load_single_data(image_path, False, False, image_size)
-    feed_dict = { images_placeholder:image, phase_train_placeholder:False }
+    feed_dict = { images_placeholder:[image], phase_train_placeholder:False }
     print('feed_dict 是什么。。。。')
     print(feed_dict)
     # emb_array[1,:] = sess.run(embeddings, feed_dict=feed_dict)
