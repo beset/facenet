@@ -73,8 +73,8 @@ def main(args):
                 embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size, embedding_size,np.zeros((1, embedding_size)),img) 
                 print img
                 print('距离：')
-                print dis
                 dis = face_distance(embedding, target_embedding)
+                print dis
                 if dis < 0.75:
                     print("同一个人")
                 else:
