@@ -1,2 +1,5 @@
 python ./src/chinese_whisper_cluster.py --model_dir=~/20170512-110547 --batch_size=30 --input=/home/mgc/test_embedding4 --output=/home/mgc/test_cluster4
 python src/compute_image_embedding.py --model_dir=~/20170512-110547 --image_path=/home/mgc/test_embedding4/others/0a9ff288cd1649746ad2815b093426b8.png
+
+
+python src/compute_image_embedding.py --model_dir=~/20170512-110547 --image_path=/home/mgc/wuyifan/e0ab7223746c4a74e0e6c5744e92a8a0.png --compare_path=/home/mgc/wuyifan

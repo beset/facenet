@@ -30,9 +30,7 @@ def compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_place
 
     images = facenet.load_data([image_path], False, False, image_size)
     feed_dict = { images_placeholder:images, phase_train_placeholder:False }
-    print("result:")
     result = sess.run(embeddings, feed_dict=feed_dict)
-    print result[0]
     return result[0]
 
 def main(args):
@@ -68,7 +66,6 @@ def main(args):
             emb_array = np.zeros((1, embedding_size))
             target_embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
             	embedding_size,emb_array,image_path)
-            print(target_embedding)
 
             compare_path = args.compare_path
             image_paths = facenet.get_image_paths(compare_path)
@@ -76,9 +73,12 @@ def main(args):
                 embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size, embedding_size,np.zeros((1, embedding_size)),img) 
                 print img
                 print('距离：')
+                print dis
                 dis = face_distance(embedding, target_embedding)
                 if dis < 0.75:
                     print("同一个人")
+                else:
+                    print("居然不是")
     
 def parse_args():
     """Parse input arguments."""
