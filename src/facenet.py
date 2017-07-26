@@ -272,7 +272,7 @@ def load_data(image_paths, do_random_crop, do_random_flip, image_size, do_prewhi
     return images
 
 def load_single_data(image_path, do_random_crop, do_random_flip, image_size, do_prewhiten=True):
-    img = misc.imread(image_paths[i])
+    img = misc.imread(image_path)
     if img.ndim == 2:
         img = to_rgb(img)
     if do_prewhiten:
