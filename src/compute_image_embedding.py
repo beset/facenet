@@ -23,8 +23,6 @@ def face_distance(face_encodings, face_to_compare):
         print('encoding 等于零')
         return np.empty((0))
     distance = np.linalg.norm(face_encodings - face_to_compare)
-    print('距离：')
-    print(distance)
     return distance
 
 def compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
@@ -75,10 +73,12 @@ def main(args):
             compare_path = args.compare_path
             image_paths = facenet.get_image_paths(compare_path)
             for idx, img in enumerate(image_paths):
-                embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size, embedding_size,np.zeros((1, embedding_size)),img)
-                print embedding  
+                embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size, embedding_size,np.zeros((1, embedding_size)),img) 
+                print img
+                print('距离：')
                 dis = face_distance(embedding, target_embedding)
-                print dis    
+                if dis < 0.75:
+                    print("同一个人")
     
 def parse_args():
     """Parse input arguments."""
