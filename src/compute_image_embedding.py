@@ -39,7 +39,6 @@ def main(args):
 
     with tf.Graph().as_default():
         with tf.Session() as sess:
-            train_set = facenet.get_dataset(args.input)
 
             facenet.load_model(args.model_dir)
             print('model loaded')
