@@ -73,9 +73,8 @@ def main(args):
 
             compare_path = args.compare_path
             image_paths = facenet.get_image_paths(compare_path)
-            for img in enumerate(image_paths):
-                embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
-                embedding_size,np.zeros((1, embedding_size)),img)
+            for idx, img in enumerate(image_paths):
+                embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size, embedding_size,np.zeros((1, embedding_size)),img)
                 print embedding  
                 dis = face_distance(embedding, target_embedding)
                 print dis    
