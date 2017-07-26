@@ -34,7 +34,7 @@ def compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_place
     feed_dict = { images_placeholder:images, phase_train_placeholder:False }
     print("result:")
     result = sess.run(embeddings, feed_dict=feed_dict)
-    print result[0]
+    print result
 
 def main(args):
     """ Main
