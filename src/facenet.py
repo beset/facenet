@@ -39,6 +39,9 @@ from tensorflow.python.training import training
 import random
 import re
 from tensorflow.python.platform import gfile
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def triplet_loss(anchor, positive, negative, alpha):
     """Calculate the triplet loss according to the FaceNet paper
