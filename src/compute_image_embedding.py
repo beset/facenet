@@ -30,8 +30,8 @@ def face_distance(face_encodings, face_to_compare):
 def compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
                 	embedding_size,emb_array,image_path):
 
-    image = facenet.load_single_data(image_path, False, False, image_size)
-    feed_dict = { images_placeholder:[image], phase_train_placeholder:False }
+    images = facenet.load_data([image_path], False, False, image_size)
+    feed_dict = { images_placeholder:images, phase_train_placeholder:False }
     print("result:")
     result = sess.run(embeddings, feed_dict=feed_dict)
     print result[0]
