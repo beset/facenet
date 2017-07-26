@@ -24,7 +24,7 @@ def face_distance(face_encodings, face_to_compare):
         return np.empty((0))
     distance = np.linalg.norm(face_encodings - face_to_compare, axis=1)
     print('距离：')
-    print distance
+    print(distance)
     return distance
 
 def _chinese_whispers(encoding_list, threshold=0.75, iterations=20):
