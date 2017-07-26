@@ -71,8 +71,9 @@ def main(args):
             	embedding_size,emb_array,image_path)
             print(target_embedding)
 
-            image_array = ['/home/mgc/test_embedding4/others/0a9ff288cd1649746ad2815b093426b8.png', '/home/mgc/test_embedding4/others/0a8bc4103a8d79d69584696b5c639b4d.png', '/home/mgc/test_embedding4/others/0a31ada738f3186d6f33bed5a7de41d3.png']
-            for img in enumerate(image_array):
+            compare_path = args.compare_path
+            image_paths = facenet.get_image_paths(compare_path)
+            for img in enumerate(image_paths):
                 embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
                 embedding_size,np.zeros((1, embedding_size)),img)
                 print embedding  
@@ -85,6 +86,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Get a shape mesh (t-pose)')
     parser.add_argument('--model_dir', type=str, help='model dir', required=True)
     parser.add_argument('--image_path', type=str, help='image path', required=True)
+    parser.add_argument('--compare_path', type=str, help='image path', required=True)
 
     args = parser.parse_args()
 
