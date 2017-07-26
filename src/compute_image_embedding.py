@@ -22,7 +22,7 @@ def face_distance(face_encodings, face_to_compare):
     if len(face_encodings) == 0:
         print('encoding 等于零')
         return np.empty((0))
-    distance = np.linalg.norm(face_encodings - face_to_compare, axis=1)
+    distance = np.linalg.norm(face_encodings - face_to_compare)
     print('距离：')
     print(distance)
     return distance
