@@ -10,20 +10,31 @@ import math
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
+def face_distance(face_encodings, face_to_compare):
+    """
+    Given a list of face encodings, compare them to a known face encoding and get a euclidean distance
+    for each comparison face. The distance tells you how similar the faces are.
+    :param faces: List of face encodings to compare
+    :param face_to_compare: A face encoding to compare against
+    :return: A numpy ndarray with the distance for each face in the same order as the 'faces' array
+    """
+    import numpy as np
+    if len(face_encodings) == 0:
+        print('encoding 等于零')
+        return np.empty((0))
+    distance = np.linalg.norm(face_encodings - face_to_compare, axis=1)
+    print('距离：')
+    print(distance)
+    return distance
 
 def compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
                 	embedding_size,emb_array,image_path):
 
     image = facenet.load_single_data(image_path, False, False, image_size)
     feed_dict = { images_placeholder:[image], phase_train_placeholder:False }
-    print('feed_dict 是什么。。。。')
-    print(feed_dict)
-    # emb_array[1,:] = sess.run(embeddings, feed_dict=feed_dict)
-
-
     print("result:")
     result = sess.run(embeddings, feed_dict=feed_dict)
-    print result
+    print result[0]
 
 def main(args):
     """ Main
@@ -56,10 +67,17 @@ def main(args):
             image_path = args.image_path
 
             emb_array = np.zeros((1, embedding_size))
-            print('emb_array:')
-            print(emb_array)
-            facial_encoding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
+            target_embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
             	embedding_size,emb_array,image_path)
+            print(target_embedding)
+
+            image_array = ['/home/mgc/test_embedding4/others/0a9ff288cd1649746ad2815b093426b8.png', '/home/mgc/test_embedding4/others/0a8bc4103a8d79d69584696b5c639b4d.png', '/home/mgc/test_embedding4/others/0a31ada738f3186d6f33bed5a7de41d3.png']
+            for img in enumerate(image_array):
+                embedding = compute_facial_encoding(sess,images_placeholder,embeddings,phase_train_placeholder,image_size,
+                embedding_size,np.zeros((1, embedding_size)),img)
+                print embedding  
+                dis = face_distance(embedding, target_embedding)
+                print dis    
     
 def parse_args():
     """Parse input arguments."""
